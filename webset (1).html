@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<title>XZC ONLY</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+html,body{
+    min-height:100%;
+    background:#010205;
+    color:#fff;
+    font-family:'Segoe UI',Arial,Helvetica,sans-serif;
+    -webkit-font-smoothing:antialiased;
+}
+
+body{overflow-x:hidden;}
+
+button{
+    font-family:inherit;
+    cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+    position:relative;
+    overflow:hidden;
+}
+
+/* ============================================
+   VIDEO LATAR BELAKANG
+   ============================================ */
+
+#bgVideo{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:0;
+    filter:brightness(.55) saturate(1.15) contrast(1.05);
+    transform:scale(1.02);
+    pointer-events:none;
+}
+
+.bgDark{
+    position:fixed;
+    inset:0;
+    z-index:1;
+    background:
+        radial-gradient(circle at 20% 0%, rgba(40,110,220,.18), transparent 55%),
+        radial-gradient(circle at 80% 100%, rgba(80,40,180,.15), transparent 55%),
+        linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.78));
+    pointer-events:none;
+}
+
+.bgGlass{
+    position:fixed;
+    inset:0;
+    z-index:2;
+    background:radial-gradient(
+        circle at center,
+        transparent 25%,
+        rgba(0,0,0,.55)
+    );
+    pointer-events:none;
+}
+
+#loginPage,
+#intro,
+#app{
+    position:relative;
+    z-index:10;
+}
+
+/* ============================================
+   LOGIN
+   ============================================ */
+
+#loginPage{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:radial-gradient(circle at 50% 30%, rgba(30,80,180,.25), rgba(2,4,10,.75));
+    backdrop-filter:blur(6px);
+    -webkit-backdrop-filter:blur(6px);
+    padding:20px;
+}
+
+.loginBox{
+    width:100%;
+    max-width:390px;
+    padding:40px 28px;
+    text-align:center;
+    border-radius:28px;
+    background:linear-gradient(145deg, rgba(255,255,255,.10), rgba(255,255,255,.02));
+    border:1px solid rgba(255,255,255,.16);
+    backdrop-filter:blur(30px) saturate(180%);
+    -webkit-backdrop-filter:blur(30px) saturate(180%);
+    box-shadow:0 25px 80px rgba(0,0,0,.75), inset 0 1px 0 rgba(255,255,255,.3);
+    animation:popIn .6s ease;
+}
+
+@keyframes popIn{
+    from{opacity:0; transform:translateY(20px) scale(.96);}
+    to{opacity:1; transform:translateY(0) scale(1);}
+}
+
+.logo{
+    width:82px;height:82px;
+    margin:0 auto 22px;
+    display:flex;align-items:center;justify-content:center;
+    border-radius:24px;
+    background:linear-gradient(145deg,#3a8bff,#0f2a66);
+    font-size:24px;font-weight:900;color:#fff;
+    box-shadow:0 12px 30px rgba(50,120,255,.5),
+               inset 0 1px 0 rgba(255,255,255,.4),
+               inset 0 -8px 20px rgba(0,0,0,.3);
+    letter-spacing:1px;
+}
+
+.loginBox h1{
+    font-size:26px;letter-spacing:1px;
+    background:linear-gradient(180deg,#fff,#9dc5ff);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+
+.loginBox p{
+    margin-top:12px;color:#b6c3d8;line-height:1.7;font-size:13.5px;
+}
+
+/* ============================================
+   TOMBOL GLASS
+   ============================================ */
+
+.loginButton,.serviceButton,.detailButton,.agreeButton,
+.saveQRIS,.uploadButton,.sendProof,.backButton,.skip{
+    position:relative;border-radius:16px;font-weight:800;letter-spacing:.3px;
+    transition:transform .18s ease, box-shadow .25s ease, background .25s ease;
+    overflow:hidden;isolation:isolate;
+}
+
+.loginButton::before,.serviceButton::before,.detailButton::before,
+.agreeButton::before,.saveQRIS::before,.uploadButton::before,
+.sendProof::before,.backButton::before,.skip::before{
+    content:"";
+    position:absolute;inset:0;
+    background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);
+    transform:translateX(-120%);
+    transition:transform .8s ease;
+    z-index:-1;
+}
+
+.loginButton:hover::before,.serviceButton:hover::before,.detailButton:hover::before,
+.agreeButton:hover::before,.saveQRIS:hover::before,.uploadButton:hover::before,
+.sendProof:hover::before,.backButton:hover::before,.skip:hover::before{
+    transform:translateX(120%);
+}
+
+.loginButton:hover,.serviceButton:hover,.detailButton:hover,.agreeButton:hover,
+.saveQRIS:hover,.uploadButton:hover,.sendProof:hover,.backButton:hover,.skip:hover{
+    transform:translateY(-2px);
+}
+
+.loginButton:active,.serviceButton:active,.detailButton:active,.agreeButton:active,
+.saveQRIS:active,.uploadButton:active,.sendProof:active,.backButton:active,.skip:active{
+    transform:translateY(0) scale(.98);
+}
+
+.loginButton{
+    width:100%;margin-top:28px;padding:17px;
+    border:1px solid rgba(140,190,255,.45);
+    color:#fff;font-size:15px;
+    background:linear-gradient(135deg, rgba(50,130,255,.75), rgba(30,80,190,.55));
+    backdrop-filter:blur(18px) saturate(180%);
+    box-shadow:0 10px 30px rgba(30,90,220,.45),
+               inset 0 1px 0 rgba(255,255,255,.4);
+}
+
+/* ============================================
+   INTRO VIDEO
+   ============================================ */
+
+#intro{
+    position:fixed;
+    inset:0;
+    z-index:9000;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    background:rgba(0,0,0,.35);
+    backdrop-filter:blur(4px);
+    -webkit-backdrop-filter:blur(4px);
+}
+
+#intro video{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    background:transparent;
+    position:relative;
+    z-index:2;
+}
+
+.introOverlay{
+    position:absolute;inset:0;z-index:3;
+    background:linear-gradient(
+        180deg,
+        rgba(0,0,0,.15) 0%,
+        rgba(0,0,0,0) 30%,
+        rgba(0,0,0,.35) 85%,
+        rgba(0,0,0,.75) 100%
+    );
+    pointer-events:none;
+}
+
+.skip{
+    position:absolute;
+    right:18px;bottom:26px;
+    z-index:5;
+    padding:13px 22px;
+    border:1px solid rgba(255,255,255,.28);
+    border-radius:14px;color:#fff;font-size:13.5px;letter-spacing:1px;
+    background:linear-gradient(145deg, rgba(255,255,255,.14), rgba(255,255,255,.04));
+    backdrop-filter:blur(18px) saturate(180%);
+    box-shadow:0 8px 25px rgba(0,0,0,.55),
+               inset 0 1px 0 rgba(255,255,255,.35);
+}
+
+.playFallback{
+    position:absolute;inset:0;z-index:6;
+    display:none;
+    align-items:center;justify-content:center;flex-direction:column;gap:18px;
+    background:rgba(0,0,0,.55);
+    backdrop-filter:blur(8px);
+    text-align:center;padding:20px;
+}
+
+.playFallback.show{display:flex;}
+
+.playCircle{
+    width:88px;height:88px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(145deg, rgba(90,150,255,.85), rgba(30,70,190,.65));
+    border:1px solid rgba(255,255,255,.35);
+    backdrop-filter:blur(22px) saturate(180%);
+    box-shadow:0 15px 40px rgba(30,90,220,.55),
+               inset 0 1px 0 rgba(255,255,255,.45);
+    font-size:32px;color:#fff;padding-left:6px;
+    animation:pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.08);}
+}
+
+.playText{color:#cfe0ff;font-size:14px;letter-spacing:1px;font-weight:700;}
+
+/* ============================================
+   APP
+   ============================================ */
+
+#app{
+    display:none;
+    min-height:100vh;
+    animation:fadeIn .5s ease;
+}
+
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+
+.navbar{
+    width:100%;max-width:1000px;margin:auto;padding:20px;
+    display:flex;justify-content:space-between;align-items:center;
+}
+
+.brand{font-size:23px;font-weight:900;letter-spacing:.5px;}
+
+.brand span{
+    background:linear-gradient(180deg,#6bb0ff,#2f6dff);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+
+.online{
+    padding:8px 14px;border-radius:30px;font-size:10.5px;font-weight:700;letter-spacing:.5px;
+    color:#b7ffd6;
+    background:linear-gradient(145deg, rgba(255,255,255,.10), rgba(255,255,255,.02));
+    border:1px solid rgba(255,255,255,.16);
+    backdrop-filter:blur(18px) saturate(160%);
+    box-shadow:0 6px 18px rgba(0,0,0,.4),
+               inset 0 1px 0 rgba(255,255,255,.25);
+}
+
+.page{
+    width:100%;max-width:700px;margin:auto;
+    padding:35px 20px 60px;
+    animation:slideUp .45s ease;
+}
+
+@keyframes slideUp{
+    from{opacity:0; transform:translateY(14px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+/* HOME */
+#homePage{display:block;text-align:center;}
+
+.badge{
+    display:inline-block;padding:11px 22px;border-radius:40px;
+    color:#a9cdff;font-size:12px;font-weight:800;letter-spacing:1px;
+    background:linear-gradient(145deg, rgba(255,255,255,.10), rgba(255,255,255,.02));
+    border:1px solid rgba(140,190,255,.30);
+    backdrop-filter:blur(20px) saturate(180%);
+    box-shadow:0 8px 25px rgba(0,0,0,.4),
+               inset 0 1px 0 rgba(255,255,255,.3);
+}
+
+.homeHero{margin-top:44px;}
+
+.homeHero h1{
+    font-size:clamp(44px,9vw,72px);line-height:1;font-weight:900;letter-spacing:-1px;
+    background:linear-gradient(180deg,#ffffff,#a9c6ff 70%,#5d8fe0);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    text-shadow:0 10px 40px rgba(60,120,255,.25);
+}
+
+.homeHero h1 span{
+    display:block;margin-top:14px;
+    background:linear-gradient(180deg,#6bb0ff,#2564ff);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+
+.homeHero p{
+    margin:26px auto;max-width:600px;color:#c9d4e5;font-size:16px;line-height:1.75;
+}
+
+.serviceButton{
+    width:100%;max-width:570px;padding:19px;
+    border:1px solid rgba(150,195,255,.40);color:#fff;font-size:17px;
+    background:linear-gradient(135deg, rgba(60,140,255,.55), rgba(30,75,180,.35));
+    backdrop-filter:blur(22px) saturate(180%);
+    box-shadow:0 12px 35px rgba(30,90,220,.40),
+               inset 0 1px 0 rgba(255,255,255,.4),
+               inset 0 -1px 0 rgba(255,255,255,.05);
+}
+
+/* PRODUCT / DETAIL / PAYMENT */
+#productPage,#detailPage,#paymentPage{display:none;}
+
+.backButton{
+    width:100%;max-width:430px;padding:15px 22px;margin-bottom:44px;
+    border:1px solid rgba(140,190,255,.35);color:#a9cdff;font-size:15px;
+    background:linear-gradient(145deg, rgba(255,255,255,.10), rgba(255,255,255,.02));
+    backdrop-filter:blur(20px) saturate(180%);
+    box-shadow:0 8px 25px rgba(0,0,0,.45),
+               inset 0 1px 0 rgba(255,255,255,.3);
+}
+
+.productTitle,.detailTitle{
+    text-align:center;font-size:clamp(36px,8vw,52px);font-weight:900;
+    letter-spacing:-.5px;margin-bottom:46px;
+    background:linear-gradient(180deg,#fff,#9dc5ff);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+
+.productCard{
+    padding:30px 26px;border-radius:26px;
+    background:linear-gradient(145deg, rgba(255,255,255,.10), rgba(255,255,255,.02));
+    border:1px solid rgba(120,175,255,.35);
+    backdrop-filter:blur(28px) saturate(180%);
+    box-shadow:0 18px 55px rgba(0,0,0,.6),
+               inset 0 1px 0 rgba(255,255,255,.28);
+}
+
+.productCard h2{
+    color:#ffe000;font-size:32px;margin-bottom:20px;
+    text-shadow:0 6px 24px rgba(255,210,0,.25);
+}
+
+.productDescription{color:#d5deeb;font-size:17px;line-height:1.7;}
+
+.detailButton{
+    width:100%;margin-top:26px;padding:17px;
+    border:1px solid rgba(255,230,120,.55);
+    background:linear-gradient(135deg,#ffe14d,#f5b800);
+    color:#141414;font-size:15px;font-weight:900;
+    box-shadow:0 12px 30px rgba(255,200,0,.35),
+               inset 0 1px 0 rgba(255,255,255,.6);
+}
+
+/* DETAIL */
+.logoCard{
+    padding:8px;border-radius:26px;
+    background:rgba(255,255,255,.95);
+    border:3px solid rgba(95,159,255,.9);
+    box-shadow:0 20px 55px rgba(40,100,220,.45),
+               inset 0 1px 0 rgba(255,255,255,.8);
+}
+
+.logoCard img{
+    display:block;width:100%;max-height:470px;object-fit:contain;border-radius:18px;
+}
+
+.featureCard{
+    margin-top:30px;padding:28px 22px;border-radius:26px;
+    background:linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+    border:1px solid rgba(110,165,255,.35);
+    backdrop-filter:blur(28px) saturate(180%);
+    box-shadow:0 18px 55px rgba(0,0,0,.6),
+               inset 0 1px 0 rgba(255,255,255,.28);
+}
+
+.featureCard h2{
+    text-align:center;color:#9dc5ff;margin-bottom:24px;letter-spacing:1px;
+}
+
+.featureList{display:flex;flex-direction:column;gap:11px;}
+
+.featureItem{
+    padding:12px 14px;border-radius:12px;color:#e2ebf8;font-size:14.5px;
+    background:linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+    border:1px solid rgba(255,255,255,.10);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.15);
+}
+
+/* TUTORIAL TOMBOL */
+.tutorial{
+    margin-top:24px;padding:14px;text-align:center;border-radius:14px;
+    color:#ffe000;font-size:14px;font-weight:800;letter-spacing:.5px;
+    background:linear-gradient(145deg, rgba(255,210,0,.14), rgba(255,210,0,.04));
+    border:1px solid rgba(255,210,0,.35);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.15);
+    cursor:pointer;
+    transition:transform .18s ease, box-shadow .25s ease;
+}
+
+.tutorial:hover{
+    transform:translateY(-2px);
+    box-shadow:
+        0 12px 30px rgba(255,210,0,.28),
+        inset 0 1px 0 rgba(255,255,255,.25);
+}
+
+.tutorial:active{transform:scale(.98);}
+
+.price{
+    margin:38px 0;text-align:center;color:#ffe000;font-size:28px;font-weight:900;
+    letter-spacing:1px;text-shadow:0 8px 30px rgba(255,210,0,.35);
+}
+
+.agreeButton{
+    width:100%;padding:19px;
+    border:1px solid rgba(120,255,200,.55);
+    background:linear-gradient(135deg,#00d28f,#00b374);
+    color:#fff;font-size:17px;
+    box-shadow:0 14px 38px rgba(0,200,140,.40),
+               inset 0 1px 0 rgba(255,255,255,.45);
+}
+
+/* PAYMENT */
+.paymentTitle{
+    text-align:center;color:#ffe000;font-size:clamp(28px,7vw,40px);
+    line-height:1.18;margin-bottom:26px;font-weight:900;letter-spacing:-.5px;
+    text-shadow:0 10px 35px rgba(255,210,0,.35);
+}
+
+.warning{
+    padding:18px 20px;border:2px solid rgba(255,190,0,.75);border-radius:16px;
+    background:linear-gradient(145deg, rgba(255,180,0,.15), rgba(120,60,0,.20));
+    color:#ffe000;font-size:13px;font-weight:800;line-height:1.75;margin-bottom:26px;
+    backdrop-filter:blur(20px) saturate(180%);
+    box-shadow:0 12px 35px rgba(255,180,0,.20),
+               inset 0 1px 0 rgba(255,255,255,.20);
+}
+
+.qrisBox{
+    padding:14px;border-radius:22px;
+    background:linear-gradient(145deg, rgba(255,255,255,.10), rgba(255,255,255,.02));
+    border:1px solid rgba(110,165,255,.40);
+    backdrop-filter:blur(26px) saturate(180%);
+    box-shadow:0 18px 55px rgba(0,0,0,.6),
+               inset 0 1px 0 rgba(255,255,255,.28);
+}
+
+.qrisBox img{
+    display:block;width:100%;background:#fff;border-radius:16px;padding:8px;
+}
+
+.saveQRIS{
+    width:100%;margin-top:12px;padding:15px;
+    border:1px solid rgba(160,195,255,.35);color:#fff;font-size:14px;
+    background:linear-gradient(135deg, rgba(60,110,220,.75), rgba(30,60,150,.55));
+    backdrop-filter:blur(18px) saturate(180%);
+    box-shadow:0 10px 28px rgba(30,70,190,.40),
+               inset 0 1px 0 rgba(255,255,255,.35);
+}
+
+/* UPLOAD */
+.uploadButton{
+    width:100%;margin-top:22px;padding:17px;
+    border:1px solid rgba(140,190,255,.45);color:#a9cdff;font-size:15px;
+    background:linear-gradient(145deg, rgba(60,130,255,.28), rgba(20,50,120,.18));
+    backdrop-filter:blur(22px) saturate(180%);
+    box-shadow:0 12px 32px rgba(30,90,220,.30),
+               inset 0 1px 0 rgba(255,255,255,.30);
+}
+
+#proofInput{display:none;}
+
+.previewBox{
+    min-height:150px;margin-top:16px;
+    display:flex;align-items:center;justify-content:center;
+    border-radius:18px;color:#89b6f5;font-size:14px;overflow:hidden;text-align:center;padding:10px;
+    background:linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+    border:1px dashed rgba(120,175,255,.45);
+    backdrop-filter:blur(20px) saturate(180%);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.18);
+}
+
+.previewBox img{
+    display:block;width:100%;max-height:320px;object-fit:contain;border-radius:12px;
+}
+
+.sendProof{
+    width:100%;margin-top:16px;padding:18px;
+    border:1px solid rgba(150,195,255,.40);color:#fff;font-size:17px;
+    background:linear-gradient(135deg, rgba(70,130,255,.75), rgba(30,60,160,.55));
+    backdrop-filter:blur(22px) saturate(180%);
+    box-shadow:0 14px 38px rgba(30,90,220,.45),
+               inset 0 1px 0 rgba(255,255,255,.40);
+}
+
+/* ============================================
+   VIDEO TUTORIAL FULLSCREEN
+   ============================================ */
+
+#tutorialPlayer{
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    background:rgba(0,0,0,.92);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    animation:fadeIn .35s ease;
+}
+
+#tutorialPlayer.show{display:flex;}
+
+#tutorialVideo{
+    width:100%;
+    height:100%;
+    max-width:100%;
+    max-height:100%;
+    object-fit:contain;
+    background:#000;
+    outline:none;
+}
+
+.closeTutorial{
+    position:absolute;
+    top:20px;
+    right:20px;
+    z-index:5;
+
+    padding:12px 20px;
+
+    border:1px solid rgba(255,255,255,.28);
+    border-radius:14px;
+
+    color:#fff;
+    font-size:13.5px;
+    font-weight:800;
+    letter-spacing:1px;
+
+    background:linear-gradient(145deg, rgba(255,255,255,.14), rgba(255,255,255,.04));
+
+    backdrop-filter:blur(18px) saturate(180%);
+    -webkit-backdrop-filter:blur(18px) saturate(180%);
+
+    box-shadow:0 8px 25px rgba(0,0,0,.55),
+               inset 0 1px 0 rgba(255,255,255,.35);
+
+    transition:transform .18s ease;
+}
+
+.closeTutorial:hover{transform:translateY(-2px);}
+.closeTutorial:active{transform:scale(.96);}
+
+body.tutorialOpen #bgVideo{filter:brightness(.3);}
+
+/* ============================================
+   MODAL REDIRECT WHATSAPP
+   ============================================ */
+
+#waRedirect{
+    position:fixed;
+    inset:0;
+    z-index:99998;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    background:rgba(0,0,0,.75);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    padding:20px;
+    animation:fadeIn .3s ease;
+}
+
+#waRedirect.show{display:flex;}
+
+.waBox{
+    width:100%;
+    max-width:360px;
+    padding:32px 26px;
+    text-align:center;
+    border-radius:24px;
+    background:linear-gradient(145deg, rgba(255,255,255,.12), rgba(255,255,255,.03));
+    border:1px solid rgba(37,211,102,.45);
+    backdrop-filter:blur(28px) saturate(180%);
+    -webkit-backdrop-filter:blur(28px) saturate(180%);
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.75),
+        0 0 60px rgba(37,211,102,.15),
+        inset 0 1px 0 rgba(255,255,255,.35);
+    animation:popIn .4s ease;
+}
+
+.waIcon{
+    width:72px;height:72px;
+    margin:0 auto 18px;
+    display:flex;align-items:center;justify-content:center;
+    border-radius:50%;
+    background:linear-gradient(145deg,#25d366,#128c4a);
+    font-size:34px;color:#fff;
+    box-shadow:0 10px 30px rgba(37,211,102,.5),
+               inset 0 1px 0 rgba(255,255,255,.5);
+    animation:pulse 1.6s ease-in-out infinite;
+}
+
+.waBox h2{
+    font-size:20px;
+    margin-bottom:10px;
+    color:#fff;
+    letter-spacing:.5px;
+}
+
+.waBox p{
+    color:#c9d4e5;
+    font-size:13.5px;
+    line-height:1.7;
+    margin-bottom:22px;
+}
+
+.waLoader{
+    width:100%;
+    height:5px;
+    border-radius:5px;
+    background:rgba(255,255,255,.12);
+    overflow:hidden;
+    margin-bottom:18px;
+}
+
+.waLoaderBar{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,#25d366,#4be08a);
+    border-radius:5px;
+    animation:waProgress 2s ease forwards;
+}
+
+@keyframes waProgress{
+    from{width:0%;}
+    to{width:100%;}
+}
+
+.waManualButton{
+    width:100%;
+    padding:15px;
+    border:1px solid rgba(37,211,102,.55);
+    border-radius:14px;
+    color:#fff;
+    font-size:14.5px;
+    font-weight:800;
+    letter-spacing:.5px;
+    background:linear-gradient(135deg,#25d366,#128c4a);
+    box-shadow:0 10px 28px rgba(37,211,102,.45),
+               inset 0 1px 0 rgba(255,255,255,.35);
+    transition:transform .18s ease;
+}
+
+.waManualButton:hover{transform:translateY(-2px);}
+.waManualButton:active{transform:scale(.97);}
+
+/* MOBILE */
+@media(max-width:600px){
+    .page{padding:28px 17px 55px;}
+    .qrisBox{padding:10px;}
+    .warning{font-size:12.5px;}
+    .loginBox{padding:34px 22px;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- ============================================
+     1. VIDEO LATAR BELAKANG
+     ============================================ -->
+
+<video id="bgVideo" autoplay muted loop playsinline webkit-playsinline preload="auto">
+    <source src="https://files.catbox.moe/hw12ny.mp4" type="video/mp4">
+</video>
+
+<div class="bgDark"></div>
+<div class="bgGlass"></div>
+
+
+<!-- ============================================
+     2. LOGIN
+     ============================================ -->
+
+<div id="loginPage">
+    <div class="loginBox">
+
+        <div class="logo">XZC</div>
+
+        <h1>𝗫𝗭𝗖 𝗢𝗡𝗟𝗬</h1>
+
+        <p>
+            Selamat datang.<br>
+            Tekan tombol di bawah untuk masuk.
+        </p>
+
+        <button class="loginButton" onclick="login()">
+            LOGIN LANGSUNG
+        </button>
+
+    </div>
+</div>
+
+
+<!-- ============================================
+     3. INTRO VIDEO
+     ============================================ -->
+
+<div id="intro">
+
+    <video id="introVideo" playsinline webkit-playsinline muted preload="auto">
+        <source src="https://files.catbox.moe/r13xje.mp4" type="video/mp4">
+    </video>
+
+    <div class="introOverlay"></div>
+
+    <div id="playFallback" class="playFallback" onclick="playIntroManually()">
+        <div class="playCircle">▶</div>
+        <div class="playText">KETUK UNTUK MEMUTAR VIDEO</div>
+    </div>
+
+    <button class="skip" onclick="skipIntro()">
+        SKIP →
+    </button>
+
+</div>
+
+
+<!-- ============================================
+     4. APP
+     ============================================ -->
+
+<div id="app">
+
+    <nav class="navbar">
+        <div class="brand">ONLY<span>BUG</span></div>
+        <div class="online">● ONLINE</div>
+    </nav>
+
+    <!-- HOME -->
+    <section id="homePage" class="page">
+        <div class="badge">TERPERCAYA DAN OTOMATIS</div>
+        <div class="homeHero">
+            <h1>ORDER XZC <span>WEB ORDER</span></h1>
+            <p>Solusi layanan digital yang mudah digunakan dan praktis.</p>
+            <button class="serviceButton" onclick="showProducts()">
+                LIHAT LAYANAN →
+            </button>
+        </div>
+    </section>
+
+    <!-- PRODUCT -->
+    <section id="productPage" class="page">
+        <button class="backButton" onclick="showHome()">← KEMBALI KE BERANDA</button>
+        <h1 class="productTitle">PILIH PRODUK KAMI</h1>
+        <div class="productCard">
+            <h2>XZC PROJECT</h2>
+            <div class="productDescription">
+                Produk digital versi terbaru dengan berbagai fitur yang tersedia.
+            </div>
+            <button class="detailButton" onclick="showDetail()">
+                👉 KLIK UNTUK LIHAT DETAIL
+            </button>
+        </div>
+    </section>
+
+    <!-- DETAIL -->
+    <section id="detailPage" class="page">
+        <button class="backButton" onclick="showProducts()">← KEMBALI KE PRODUK</button>
+        <h1 class="detailTitle">XZC PROJECT</h1>
+
+        <div class="logoCard">
+            <img src="https://files.catbox.moe/gjihw4.jpg" alt="Produk">
+        </div>
+
+        <div class="featureCard">
+            <h2>◆ FITUR BUG</h2>
+            <div class="featureList">
+                <div class="featureItem">◆ BLANK</div>
+                <div class="featureItem">◆ FC INVISIBLE</div>
+                <div class="featureItem">◆ FC PERMANEN</div>
+                <div class="featureItem">◆ KIL KUOTA</div>
+                <div class="featureItem">◆ FREZEE + LAG</div>
+                <div class="featureItem">◆ DELAY INVISIBLE</div>
+                <div class="featureItem">◆ COMBO ATTAC</div>
+                <div class="featureItem">◆ DLL</div>
+            </div>
+
+            <div class="tutorial" onclick="openTutorial()" role="button" tabindex="0">
+                ▶ Tonton Tutorial Penggunaan
+            </div>
+        </div>
+
+        <div class="price">
+            HARGA: Rp 15.000<br>PERMANEN
+        </div>
+
+        <button class="agreeButton" onclick="showPayment()">
+            ✅ SAYA SETUJU & LANJUT KE PEMBAYARAN
+        </button>
+    </section>
+
+    <!-- PAYMENT -->
+    <section id="paymentPage" class="page">
+        <button class="backButton" onclick="showDetail()">← KEMBALI KE DETAIL</button>
+        <h1 class="paymentTitle">PEMBAYARAN<br>XZC PROJECT</h1>
+
+        <div class="warning">
+            ⚠️ PERINGATAN WAJIB:<br><br>
+            WAJIB SCREENSHOT BUKTI PEMBAYARAN.<br><br>
+            Setelah melakukan pembayaran,
+            pilih foto bukti transfer di bawah.
+        </div>
+
+        <div class="qrisBox">
+            <img id="qrisImage" src="https://files.catbox.moe/38646j.jpg" alt="QRIS Pembayaran">
+            <button class="saveQRIS" onclick="saveQRIS()">
+                💾 SIMPAN GAMBAR QRIS
+            </button>
+        </div>
+
+        <input type="file" id="proofInput" accept="image/*" onchange="previewProof(event)">
+
+        <button class="uploadButton" onclick="document.getElementById('proofInput').click()">
+            📷 PILIH FOTO BUKTI TRANSFER
+        </button>
+
+        <div id="previewBox" class="previewBox">
+            Belum ada foto bukti dipilih
+        </div>
+
+        <button id="sendProofButton" class="sendProof" onclick="sendProof()">
+            📤 KIRIM BUKTI TRANSFER
+        </button>
+    </section>
+
+</div>
+
+
+<!-- ============================================
+     5. VIDEO TUTORIAL FULLSCREEN
+     ============================================ -->
+
+<div id="tutorialPlayer">
+
+    <video
+        id="tutorialVideo"
+        playsinline
+        webkit-playsinline
+        controls
+        controlsList="nodownload"
+        preload="auto">
+
+        <source
+            src="https://files.catbox.moe/hj0v78.mp4"
+            type="video/mp4">
+
+    </video>
+
+    <button class="closeTutorial" onclick="closeTutorial()">
+        ✕ TUTUP
+    </button>
+
+</div>
+
+
+<!-- ============================================
+     6. MODAL AUTO REDIRECT WHATSAPP
+     ============================================ -->
+
+<div id="waRedirect">
+
+    <div class="waBox">
+
+        <div class="waIcon">📱</div>
+
+        <h2>MENGALIHKAN KE WHATSAPP</h2>
+
+        <p>
+            Bukti transfer berhasil disiapkan.<br>
+            Anda akan diarahkan ke WhatsApp Admin...
+        </p>
+
+        <div class="waLoader">
+            <div class="waLoaderBar"></div>
+        </div>
+
+        <button class="waManualButton" onclick="goToWhatsAppNow()">
+            BUKA WHATSAPP SEKARANG
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =====================================
+NOMOR WHATSAPP ADMIN
+===================================== */
+
+const NOMOR_ADMIN = "6283105482471";
+
+
+/* ELEMENT */
+
+const loginPage      = document.getElementById("loginPage");
+const intro          = document.getElementById("intro");
+const introVideo     = document.getElementById("introVideo");
+const playFallback   = document.getElementById("playFallback");
+const app            = document.getElementById("app");
+const homePage       = document.getElementById("homePage");
+const productPage    = document.getElementById("productPage");
+const detailPage     = document.getElementById("detailPage");
+const paymentPage    = document.getElementById("paymentPage");
+const bgVideo        = document.getElementById("bgVideo");
+const tutorialPlayer = document.getElementById("tutorialPlayer");
+const tutorialVideo  = document.getElementById("tutorialVideo");
+const waRedirect     = document.getElementById("waRedirect");
+
+
+/* =====================================
+   VIDEO LATAR — JALAN TERUS
+===================================== */
+
+function ensureBgVideoPlaying(){
+    if(!bgVideo) return;
+    bgVideo.muted = true;
+    bgVideo.playbackRate = 1;
+    const p = bgVideo.play();
+    if(p && p.catch) p.catch(()=>{});
+}
+
+window.addEventListener("load", ensureBgVideoPlaying);
+
+document.addEventListener("visibilitychange", ()=>{
+    if(!document.hidden) ensureBgVideoPlaying();
+});
+
+window.addEventListener("touchstart", ensureBgVideoPlaying, { once:true });
+window.addEventListener("click", ensureBgVideoPlaying, { once:true });
+window.addEventListener("mousedown", ensureBgVideoPlaying, { once:true });
+
+bgVideo.addEventListener("ended", ()=>{
+    bgVideo.currentTime = 0;
+    ensureBgVideoPlaying();
+});
+
+
+/* =====================================
+   LOGIN → INTRO
+===================================== */
+
+function login(){
+
+    loginPage.style.display="none";
+    ensureBgVideoPlaying();
+
+    intro.style.display="flex";
+
+    introVideo.currentTime = 0;
+    introVideo.muted = false;
+
+    const playPromise = introVideo.play();
+
+    if(playPromise && playPromise.catch){
+        playPromise.catch(()=>{
+            introVideo.muted = true;
+            introVideo.play().catch(()=>{
+                playFallback.classList.add("show");
+            });
+        });
+    }
+
+    setTimeout(()=>{
+        if(introVideo.paused){
+            playFallback.classList.add("show");
+        }
+    }, 1200);
+}
+
+function playIntroManually(){
+    playFallback.classList.remove("show");
+    introVideo.muted = false;
+    introVideo.play().catch(()=>{
+        introVideo.muted = true;
+        introVideo.play().catch(()=>{});
+    });
+}
+
+introVideo.addEventListener("playing", ()=>{
+    playFallback.classList.remove("show");
+});
+
+introVideo.addEventListener("ended", showHome);
+
+function skipIntro(){
+    introVideo.pause();
+    showHome();
+}
+
+
+/* =====================================
+   HALAMAN
+===================================== */
+
+function showHome(){
+    intro.style.display="none";
+    app.style.display="block";
+
+    homePage.style.display="block";
+    productPage.style.display="none";
+    detailPage.style.display="none";
+    paymentPage.style.display="none";
+
+    ensureBgVideoPlaying();
+    window.scrollTo({top:0, behavior:"smooth"});
+}
+
+function showProducts(){
+    homePage.style.display="none";
+    productPage.style.display="block";
+    detailPage.style.display="none";
+    paymentPage.style.display="none";
+    window.scrollTo({top:0, behavior:"smooth"});
+}
+
+function showDetail(){
+    homePage.style.display="none";
+    productPage.style.display="none";
+    detailPage.style.display="block";
+    paymentPage.style.display="none";
+    window.scrollTo({top:0, behavior:"smooth"});
+}
+
+function showPayment(){
+    homePage.style.display="none";
+    productPage.style.display="none";
+    detailPage.style.display="none";
+    paymentPage.style.display="block";
+    window.scrollTo({top:0, behavior:"smooth"});
+}
+
+
+/* =====================================
+   VIDEO TUTORIAL FULLSCREEN
+===================================== */
+
+function openTutorial(){
+    tutorialPlayer.classList.add("show");
+    document.body.classList.add("tutorialOpen");
+
+    tutorialVideo.currentTime = 0;
+    tutorialVideo.muted = false;
+
+    const p = tutorialVideo.play();
+
+    if(p && p.catch){
+        p.catch(()=>{
+            tutorialVideo.muted = true;
+            tutorialVideo.play().catch(()=>{});
+        });
+    }
+
+    document.body.style.overflow = "hidden";
+}
+
+function closeTutorial(){
+    tutorialVideo.pause();
+    tutorialVideo.currentTime = 0;
+
+    tutorialPlayer.classList.remove("show");
+    document.body.classList.remove("tutorialOpen");
+    document.body.style.overflow = "";
+}
+
+document.addEventListener("keydown", (e)=>{
+    if(e.key === "Escape" && tutorialPlayer.classList.contains("show")){
+        closeTutorial();
+    }
+});
+
+tutorialPlayer.addEventListener("click", (e)=>{
+    if(e.target === tutorialPlayer){
+        closeTutorial();
+    }
+});
+
+
+/* =====================================
+   SIMPAN QRIS
+===================================== */
+
+function saveQRIS(){
+    const img  = document.getElementById("qrisImage");
+    const link = document.createElement("a");
+    link.href = img.src;
+    link.download = "QRIS-XZC.jpg";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+}
+
+
+/* =====================================
+   PREVIEW BUKTI
+===================================== */
+
+function previewProof(event){
+    const file = event.target.files[0];
+    if(!file) return;
+    if(!file.type.startsWith("image/")){
+        alert("File harus berupa gambar.");
+        return;
+    }
+    const reader = new FileReader();
+    reader.onload = function(e){
+        document.getElementById("previewBox").innerHTML =
+            `<img src="${e.target.result}" alt="Preview bukti transfer">`;
+    };
+    reader.readAsDataURL(file);
+}
+
+
+/* =====================================
+   SIMPAN PESAN & LINK WA TERAKHIR
+===================================== */
+
+let lastWaURL = "";
+
+
+/* =====================================
+   KIRIM BUKTI → AUTO REDIRECT WHATSAPP
+===================================== */
+
+async function sendProof(){
+
+    const input = document.getElementById("proofInput");
+    const file  = input.files[0];
+
+    if(!file){
+        alert("Pilih foto bukti transfer terlebih dahulu.");
+        return;
+    }
+
+    /* pesan WA */
+    const message =
+`Halo Admin XZC,
+
+Saya sudah melakukan pembayaran untuk XZC PROJECT.
+
+Nama:
+[ISI NAMA]
+
+Nominal:
+Rp 30.000
+
+Mohon diverifikasi ya, terima kasih.`;
+
+    /* simpan URL WA biar bisa dipakai di tombol manual */
+    lastWaURL =
+        "https://wa.me/" + NOMOR_ADMIN +
+        "?text=" + encodeURIComponent(message);
+
+    /* tampilkan modal redirect */
+    waRedirect.classList.add("show");
+
+    /* coba pakai Web Share API dulu (kalau didukung) */
+    let shared = false;
+
+    if(navigator.share && navigator.canShare){
+        try{
+            const shareData = {
+                title:"Bukti Pembayaran XZC",
+                text:message,
+                files:[file]
+            };
+
+            if(navigator.canShare(shareData)){
+                await navigator.share(shareData);
+                shared = true;
+            }
+        }catch(error){
+            /* user batal share → abaikan */
+            if(error && error.name === "AbortError"){
+                shared = true;
+            }
+        }
+    }
+
+    /* setelah share / gagal share → auto redirect ke WA */
+    setTimeout(()=>{
+        goToWhatsAppNow();
+    }, 1800);
+}
+
+
+/* =====================================
+   BUKA / REDIRECT KE WHATSAPP
+===================================== */
+
+function goToWhatsAppNow(){
+
+    if(!lastWaURL){
+        const message =
+`Halo Admin XZC,
+
+Saya sudah melakukan pembayaran untuk XZC PROJECT.
+
+Nama:
+[ISI NAMA]
+
+Nominal:
+Rp 30.000
+
+Mohon diverifikasi ya, terima kasih.`;
+
+        lastWaURL =
+            "https://wa.me/" + NOMOR_ADMIN +
+            "?text=" + encodeURIComponent(message);
+    }
+
+    /* redirect langsung (buka aplikasi WA) */
+    window.location.href = lastWaURL;
+}
+
+
+/* =====================================
+   ERROR VIDEO
+===================================== */
+
+bgVideo.addEventListener("error", ()=>{
+    console.log("Background video tidak dapat dimuat.");
+});
+introVideo.addEventListener("error", ()=>{
+    console.log("Intro video tidak dapat dimuat.");
+});
+tutorialVideo.addEventListener("error", ()=>{
+    console.log("Tutorial video tidak dapat dimuat.");
+});
+
+</script>
+
+</body>
+</html>
